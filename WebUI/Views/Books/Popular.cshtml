@@ -1,0 +1,32 @@
+﻿@using Domain.Entities
+@model IEnumerable<Book>
+
+<div class="well" style="margin-right: 10px; padding-top: 0">
+    <div class="row">
+
+        <h3 style="text-align: center">
+            <b>Популярные товары</b>
+        </h3>
+
+        @foreach (var book in Model)
+        {
+            <div class="col-xs-9">
+                <h4>
+                    <strong>@book.Name</strong>
+                </h4>
+                <h5>
+                    <strong>@book.Author</strong>
+                </h5>
+            </div>
+
+            <div class="col-xs-2" style="padding-right: 0">
+                <h4>
+                    <strong id="price" class="pull-right label label-primary">
+                        @book.Price.ToString("# грн")
+                    </strong>
+                </h4>
+            </div>
+        }
+
+    </div>
+</div>

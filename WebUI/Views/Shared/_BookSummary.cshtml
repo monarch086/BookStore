@@ -1,0 +1,43 @@
+﻿@model Domain.Entities.Book
+
+<div class="well col-sm-3 col-xs-12" style="min-width: 250px; max-height: 150px; margin-right: 10px">
+    <div class="row">
+        <div class="col-xs-9">
+            
+            @if (Model.ImageData != null)
+            {
+                <div class="pull-left" style="margin-right: 10px">
+                    <img class="img-thumbnail" width="75" height="75"
+                         src="@Url.Action("GetImage", "Book",
+                new { Model.BookId })" />
+                </div>
+            }
+            
+            <h3>
+                <strong>@Model.Name</strong>
+            </h3>
+            <h4>
+                <strong>@Model.Author</strong>
+            </h4>
+        </div>
+        <div class="col-xs-2">
+            <h3>
+                <strong id="price" class="pull-right label label-primary">
+                    @Model.Price.ToString("# грн")
+                </strong>
+            </h3>
+            
+            @using (Html.BeginForm("AddToCart", "Cart"))
+            {
+                <div class="pull-right">
+                    @Html.HiddenFor(x => x.BookId)
+                    @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                    <input type="submit" class="btn btn-success" value="В корзину"/>
+                </div>
+            }
+        </div>
+    </div>
+    <span class="lead">
+        @Model.Description
+    </span>
+</div>

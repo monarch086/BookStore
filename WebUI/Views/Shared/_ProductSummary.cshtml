@@ -1,0 +1,40 @@
+﻿@model Domain.Entities.Product
+
+<div class="well col-sm-3 col-xs-12" style="min-width: 250px; max-height: 190px; margin-right: 10px">
+    <div class="row">
+        <div>
+            @if (/*Model.ImageData != null*/ true)
+            {
+                <div class="pull-left" style="margin-right: 10px">
+                    <img class="img-thumbnail" width="120" height="120"
+                         src="@(Url.Action("GetImage", "Products",
+                    new { Model.ProductId }))" />
+                </div>
+            }
+        </div>
+        <div>
+            <h5>
+                @Model.Name
+            </h5>
+        </div>
+        <div>
+            <div class="col-sm-6 col-xs-6" style="margin-top: -10px">
+                <h3>
+                    <strong id="price" class="pull-right label label-primary">
+                        @Model.Price.ToString("# грн")
+                    </strong>
+                </h3>
+            </div>
+            <div class="col-sm-6 col-xs-6" style="margin-top: 7px">
+                @using (Html.BeginForm("AddToCart", "Cart"))
+                {
+                    <div class="pull-right">
+                        @Html.HiddenFor(x => x.ProductId)
+                        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                        <input type="submit" class="btn btn-success" value="В корзину" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

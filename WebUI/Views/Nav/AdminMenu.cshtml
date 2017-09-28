@@ -1,0 +1,36 @@
+﻿<div class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#adminNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Админ. панель", "Index", "Admin", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="collapse navbar-collapse" id="adminNavbar">
+            <ul class="nav navbar-nav">
+                <li>
+                    @Html.ActionLink("Категории товаров", "Index", "Movie", new { area = "" }, new { @class = "navbar-brand" })
+                </li>
+                <li>
+                    @Html.ActionLink("Доставка", "Index", "Movie", new { area = "" }, new { @class = "navbar-brand" })
+                </li>
+                <li>
+                    @Html.ActionLink("О магазине", "Index", "Movie", new { area = "" }, new { @class = "navbar-brand" })
+                </li>
+                <li>
+                    @Html.ActionLink("Заказы", "Index", "Movie", new { area = "" }, new { @class = "navbar-brand" })
+                </li>
+                <li>
+                    @Html.ActionLink("На сайт", "List", "Books", new { area = "" }, new { @class = "navbar-brand" })
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="@Url.Action("SignOut", "Account")" class = "navbar-brand"><span class="glyphicon glyphicon-log-out"></span> Выход</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
