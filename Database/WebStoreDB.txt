@@ -1,0 +1,130 @@
+CREATE TABLE [Products] (
+	ProductID integer NOT NULL,
+	Name varchar(100) NOT NULL,
+	Manufacturer varchar(100) NOT NULL,
+	Description varchar(500) NOT NULL,
+	Category integer NOT NULL,
+	Price decimal(16,2) NOT NULL,
+  CONSTRAINT [PK_PRODUCTS] PRIMARY KEY CLUSTERED
+  (
+  [ProductID] ASC
+  ) WITH (IGNORE_DUP_KEY = OFF)
+
+)
+GO
+CREATE TABLE [Categories] (
+	CategoryID integer NOT NULL,
+	Name varchar(50) NOT NULL,
+  CONSTRAINT [PK_CATEGORIES] PRIMARY KEY CLUSTERED
+  (
+  [CategoryID] ASC
+  ) WITH (IGNORE_DUP_KEY = OFF)
+
+)
+GO
+CREATE TABLE [Images] (
+	ID integer NOT NULL,
+	ProductID integer NOT NULL,
+	Path varchar(100) NOT NULL,
+  CONSTRAINT [PK_IMAGES] PRIMARY KEY CLUSTERED
+  (
+  [ID] ASC
+  ) WITH (IGNORE_DUP_KEY = OFF)
+
+)
+GO
+CREATE TABLE [Comments] (
+	ID integer NOT NULL,
+	ProductID integer NOT NULL,
+	Message varchar(250) NOT NULL,
+	Author varchar(50) NOT NULL,
+	Email varchar(20) NOT NULL,
+	Date datetime NOT NULL,
+  CONSTRAINT [PK_COMMENTS] PRIMARY KEY CLUSTERED
+  (
+  [ID] ASC
+  ) WITH (IGNORE_DUP_KEY = OFF)
+
+)
+GO
+CREATE TABLE [Orders] (
+	ID integer NOT NULL,
+	ProductID integer NOT NULL,
+	UserID integer NOT NULL,
+	Quantity integer NOT NULL,
+	Date datetime NOT NULL,
+	Status integer NOT NULL,
+	ShippingID integer NOT NULL,
+	Packing boolean NOT NULL,
+  CONSTRAINT [PK_ORDERS] PRIMARY KEY CLUSTERED
+  (
+  [ID] ASC
+  ) WITH (IGNORE_DUP_KEY = OFF)
+
+)
+GO
+CREATE TABLE [Users] (
+	UserID integer NOT NULL,
+	Name varchar(50) NOT NULL,
+	Surname varchar(50) NOT NULL,
+	Email varchar(50) NOT NULL,
+	VerificationCode varchar(100),
+	PhoneNumber varchar(20),
+  CONSTRAINT [PK_USERS] PRIMARY KEY CLUSTERED
+  (
+  [UserID] ASC
+  ) WITH (IGNORE_DUP_KEY = OFF)
+
+)
+GO
+CREATE TABLE [Shippings] (
+	ShippingID integer NOT NULL,
+	State varchar(20) NOT NULL,
+	City varchar(20) NOT NULL,
+	Street varchar(20) NOT NULL,
+	AddressLine1 varchar(20),
+	AddressLine2 varchar(20),
+	AddressLine3 varchar(20),
+  CONSTRAINT [PK_SHIPPINGS] PRIMARY KEY CLUSTERED
+  (
+  [ShippingID] ASC
+  ) WITH (IGNORE_DUP_KEY = OFF)
+
+)
+GO
+ALTER TABLE [Products] WITH CHECK ADD CONSTRAINT [Products_fk0] FOREIGN KEY ([Category]) REFERENCES [Categories]([CategoryID])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [Products] CHECK CONSTRAINT [Products_fk0]
+GO
+
+
+ALTER TABLE [Images] WITH CHECK ADD CONSTRAINT [Images_fk0] FOREIGN KEY ([ProductID]) REFERENCES [Products]([ProductID])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [Images] CHECK CONSTRAINT [Images_fk0]
+GO
+
+ALTER TABLE [Comments] WITH CHECK ADD CONSTRAINT [Comments_fk0] FOREIGN KEY ([ProductID]) REFERENCES [Products]([ProductID])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [Comments] CHECK CONSTRAINT [Comments_fk0]
+GO
+
+ALTER TABLE [Orders] WITH CHECK ADD CONSTRAINT [Orders_fk0] FOREIGN KEY ([ProductID]) REFERENCES [Products]([ProductID])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [Orders] CHECK CONSTRAINT [Orders_fk0]
+GO
+ALTER TABLE [Orders] WITH CHECK ADD CONSTRAINT [Orders_fk1] FOREIGN KEY ([UserID]) REFERENCES [Users]([UserID])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [Orders] CHECK CONSTRAINT [Orders_fk1]
+GO
+ALTER TABLE [Orders] WITH CHECK ADD CONSTRAINT [Orders_fk2] FOREIGN KEY ([ShippingID]) REFERENCES [Shippings]([ShippingID])
+ON UPDATE CASCADE
+GO
+ALTER TABLE [Orders] CHECK CONSTRAINT [Orders_fk2]
+GO
+
+

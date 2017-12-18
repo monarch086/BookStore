@@ -1,0 +1,13 @@
+SET IDENTITY_INSERT [dbo].[Books] ON
+INSERT INTO [dbo].[Books] ([BookID], [Name], [Author], [Description], [Genre], [Price], [ImageData], [ImageMimeType]) VALUES (1, N'Книга 1', N'Автор 1', N'Описание книги 1', N'Повесть', CAST(115.00 AS Decimal(16, 2)), <SQLVARIANT>, NULL)
+INSERT INTO [dbo].[Books] ([BookID], [Name], [Author], [Description], [Genre], [Price], [ImageData], [ImageMimeType]) VALUES (2, N'Книга 2', N'Автор 2', N'Описание книги 2', N'Триллер', CAST(118.50 AS Decimal(16, 2)), <SQLVARIANT>, NULL)
+INSERT INTO [dbo].[Books] ([BookID], [Name], [Author], [Description], [Genre], [Price], [ImageData], [ImageMimeType]) VALUES (3, N'Книга 3', N'Автор 3', N'Описание книги 3', N'Комикс', CAST(130.00 AS Decimal(16, 2)), <SQLVARIANT>, NULL)
+INSERT INTO [dbo].[Books] ([BookID], [Name], [Author], [Description], [Genre], [Price], [ImageData], [ImageMimeType]) VALUES (4, N'Книга 4', N'Автор 4', N'Описание книги 4', N'Энциклопедия', CAST(700.00 AS Decimal(16, 2)), <SQLVARIANT>, NULL)
+INSERT INTO [dbo].[Books] ([BookID], [Name], [Author], [Description], [Genre], [Price], [ImageData], [ImageMimeType]) VALUES (5, N'Книга 5', N'Автор 5', N'Описание книги 5', N'Учебник', CAST(920.00 AS Decimal(16, 2)), <SQLVARIANT>, NULL)
+INSERT INTO [dbo].[Books] ([BookID], [Name], [Author], [Description], [Genre], [Price], [ImageData], [ImageMimeType]) VALUES (6, N'Книга 6', N'Автор 6', N'Описание книги 6', N'Учебник', CAST(80.30 AS Decimal(16, 2)), <SQLVARIANT>, NULL)
+INSERT INTO [dbo].[Books] ([BookID], [Name], [Author], [Description], [Genre], [Price], [ImageData], [ImageMimeType]) VALUES (7, N'Книга 7', N'Автор 7', N'Описание книги 7', N'Триллер', CAST(100.00 AS Decimal(16, 2)), <SQLVARIANT>, NULL)
+INSERT INTO [dbo].[Books] ([BookID], [Name], [Author], [Description], [Genre], [Price], [ImageData], [ImageMimeType]) VALUES (8, N'Книга 8', N'Автор 8', N'Описание книги 8', N'Повесть', CAST(250.70 AS Decimal(16, 2)), <SQLVARIANT>, NULL)
+INSERT INTO [dbo].[Books] ([BookID], [Name], [Author], [Description], [Genre], [Price], [ImageData], [ImageMimeType]) VALUES (9, N'Книга 9', N'Автор 9', N'Описание книги 9', N'Триллер', CAST(310.00 AS Decimal(16, 2)), <SQLVARIANT>, NULL)
+INSERT INTO [dbo].[Books] ([BookID], [Name], [Author], [Description], [Genre], [Price], [ImageData], [ImageMimeType]) VALUES (10, N'Книга 10', N'Автор 10', N'Описание книги 10', N'Рассказ', CAST(170.10 AS Decimal(16, 2)), <SQLVARIANT>, NULL)
+INSERT INTO [dbo].[Books] ([BookID], [Name], [Author], [Description], [Genre], [Price], [ImageData], [ImageMimeType]) VALUES (11, N'Журнал №7/2017', N'Концерн', N'Новости Концерна "Укроборонпром"', N'Новости Концерна', CAST(15.00 AS Decimal(16, 2)), <Binary Data>, N'image/jpeg')
+SET IDENTITY_INSERT [dbo].[Books] OFF
