@@ -1,15 +1,18 @@
-﻿@model Domain.Entities.Product
+﻿@using WebUI.Controllers
+@model Domain.Entities.Product
 
 <div class="well col-sm-3 col-xs-12" style="min-width: 250px; max-height: 190px; margin-right: 10px">
     <div class="row">
         <div>
             @if (/*Model.ImageData != null*/ true)
             {
-                <div class="pull-left" style="margin-right: 10px">
-                    <img class="img-thumbnail" width="120" height="120"
-                         src="@(Url.Action("GetImage", "Products",
-                    new { Model.ProductId }))" />
-                </div>
+                    string Path = Html.Action("GetImage", "Products",
+                        new {Model.ProductId}).ToString();
+
+                    <div class="pull-left" style="margin-right: 10px; max-height: 50px">
+                        <img style="max-width: 80px; max-height: 80px;"
+                             src="@Path"/>
+                    </div>
             }
         </div>
         <div>
