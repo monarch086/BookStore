@@ -1,15 +1,42 @@
 ﻿@model WebUI.Models.ProductViewModel
 
 @{
-    ViewBag.Title = "Product";
+    ViewBag.Title = Model.Product.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>@Model.Product.Name</h2>
 
 <div>
-    <h4>@Model.Product.Name</h4>
-    <hr />
+    <div class="well">
+        
+        @if (Model.ImagesPaths != null)
+        {
+            <div style="display: inline-block">
+            @foreach (string imagePath in Model.ImagesPaths)
+            {
+                <div  style="margin-right: 10px; float: left;">
+                    <img style="max-width: 150px; max-height: 150px;" class="img-thumbnail"
+                         src="@imagePath"/>
+                </div>
+            }
+            </div>
+        }
+        
+        <h4><b>Характеристики:</b></h4>
+
+        <p><b>Производитель:</b> @Model.Product.Manufacturer</p>
+
+        <div class="form-group">
+            @Html.LabelFor(modelItem => Model.Product.Description)
+            @Html.TextAreaFor(m => m.Product.Description, new {@class = "form-control", rows = 5})
+        </div>
+
+        <p><b>Категория:</b> @Model.Category.Name</p>
+
+        @Html.Label("Цена: " + Model.Product.Price.ToString("# грн"), new {@class = "btn btn-warning"})
+    </div>
+
     <dl class="dl-horizontal">
     </dl>
 </div>

@@ -1,4 +1,5 @@
-﻿using Domain.Abstract;
+﻿using System.Collections;
+using Domain.Abstract;
 using Domain.Entities;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,8 +55,8 @@ namespace WebUI.Controllers
                     Product = product,
                     Category = repository.Categories
                         .FirstOrDefault(c => c.CategoryId == product.Category),
-                    Images = repository.Images
-                    .Where(i => i.ProductID == productId).ToList() as IEnumerable<string>,
+                    ImagesPaths = repository.Images
+                    .Where(i => i.ProductID == productId).Select(i => i.Path).ToArray(),
                     ReturnUrl = returnUrl
                 };
                 return View(model);
