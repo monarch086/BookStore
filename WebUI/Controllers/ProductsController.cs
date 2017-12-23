@@ -1,9 +1,9 @@
 ﻿using Domain.Abstract;
 using Domain.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Net;
+using System.Net.Http;
 using System.Web.Mvc;
 using WebUI.Models;
 
@@ -40,6 +40,28 @@ namespace WebUI.Controllers
             };
 
             return View(model);
+        }
+
+        public ActionResult GetProduct(int productId, string returnUrl)
+        {
+            Product product = repository.Products
+                .FirstOrDefault(p => p.ProductId == productId);
+
+            if (product != null)
+            {
+                ProductViewModel model = new ProductViewModel
+                {
+                    Product = product,
+                    Category = repository.Categories
+                        .FirstOrDefault(c => c.CategoryId == product.Category),
+                    Images = repository.Images
+                    .Where(i => i.ProductID == productId).ToList() as IEnumerable<string>,
+                    ReturnUrl = returnUrl
+                };
+                return View(model);
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Product not found");
         }
 
         public string GetImage(int productId)

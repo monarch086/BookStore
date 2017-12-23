@@ -17,7 +17,7 @@
         </div>
         <div>
             <h5>
-                @Model.Name
+                @Html.ActionLink(Model.Name, "GetProduct", new {productId = Model.ProductId, returnUrl = Request.Url.PathAndQuery})
             </h5>
         </div>
         <div>
