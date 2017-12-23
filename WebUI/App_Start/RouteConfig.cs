@@ -28,8 +28,8 @@ namespace WebUI
 
             routes.MapRoute(
                 null,
-                "{genre}/Page{page}",
-                new { controller = "Books", action = "List", page = 1 }
+                "{category}/Page{page}",
+                new { controller = "Products", action = "List", page = 1 }
             );
 
             routes.MapRoute(
@@ -40,8 +40,8 @@ namespace WebUI
 
             routes.MapRoute(
                 null,
-                "{genre}/Page{page}",
-                new { controller = "Books", action = "List"},
+                "{category}/Page{page}",
+                new { controller = "Products", action = "List"},
                 new { page = @"\d+"}
             );
 

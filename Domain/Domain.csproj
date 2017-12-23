@@ -79,14 +79,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\IBookRepository.cs" />
     <Compile Include="Abstract\IOrderProcessor.cs" />
     <Compile Include="Abstract\IRepository.cs" />
-    <Compile Include="Concrete\EFBookRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\EFRepository.cs" />
     <Compile Include="Concrete\EmailOrderProcessor.cs" />
-    <Compile Include="Entities\Book.cs" />
     <Compile Include="Entities\Cart.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Image.cs" />

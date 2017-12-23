@@ -25,7 +25,6 @@ namespace WebUI.Infrastructure
         private void AddBindings()
         {
             //Здесь будут размещены привязки
-            kernel.Bind<IBookRepository>().To<EFBookRepository>();
             kernel.Bind<IRepository>().To<EFRepository>();
 
             EmailSettings emailSettings = new EmailSettings

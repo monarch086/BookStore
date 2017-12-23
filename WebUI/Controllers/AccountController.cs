@@ -42,7 +42,7 @@ namespace WebUI.Controllers
         public ActionResult SignOut()
         {
             authProvider.SignOut();
-            return Redirect(Url.Action("List", "Books"));
+            return Redirect(Url.Action("List", "Products"));
         }
     }
 }

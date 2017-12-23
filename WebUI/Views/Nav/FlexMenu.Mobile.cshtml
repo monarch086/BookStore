@@ -5,7 +5,7 @@
     <ul>
 
         <li>
-            @Html.ActionLink("Все книги", "List", "Books", null,
+            @Html.ActionLink("Все книги", "List", "Products", null,
             new
             {
                 data_transition = "fade",
@@ -18,7 +18,7 @@
             <li>
                 @Html.RouteLink(link, new
                 {
-                    controller = "Books",
+                    controller = "Products",
                     action = "List",
                     genre = link,
                     page = 1

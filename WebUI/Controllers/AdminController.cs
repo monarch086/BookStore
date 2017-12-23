@@ -1,12 +1,8 @@
 ﻿using Domain.Abstract;
 using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WebUI.Models;
 
 namespace WebUI.Controllers
 {
@@ -24,33 +20,6 @@ namespace WebUI.Controllers
         {
             return View(repository.Products);
         }
-
-        //public ViewResult Edit(int productId)
-        //{
-        //    Product product = repository.Products.FirstOrDefault(b => b.ProductId == productId);
-        //    IEnumerable<Image> images = repository.Images.Where(i => i.ProductID == productId);
-
-        //    return View(new ProductViewModel { Product = product, Images = images });
-        //}
-
-        //[HttpPost]
-        //public ActionResult Edit(ProductViewModel product, HttpPostedFileBase image = null)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        if (image != null)
-        //        {
-        //            repository.AddImage(image, product.Product.ProductId);
-        //        }
-        //        repository.SaveProduct(product.Product);
-        //        TempData["message"] = string.Format("Изменение информации о товаре \"{0}\" сохранены", product.Product.Name);
-        //        return RedirectToAction("Index");
-        //    }
-        //    else
-        //    {
-        //        return View(product);
-        //    }
-        //}
 
         public ViewResult Edit(int productId)
         {
