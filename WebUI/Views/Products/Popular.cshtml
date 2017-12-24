@@ -28,7 +28,7 @@
 
             <div style="clear: both">
                 <h5>
-                    @product.Product.Name
+                    @Html.ActionLink(product.Product.Name, "GetProduct", new { productId = product.Product.ProductId, returnUrl = Request.Url.PathAndQuery })
                 </h5>
             </div>
         }
