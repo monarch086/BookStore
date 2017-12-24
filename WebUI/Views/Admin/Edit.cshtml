@@ -1,4 +1,4 @@
-﻿@model Domain.Entities.Product
+﻿@model WebUI.Models.ProductEditViewModel
 
 @{
     ViewBag.Title = "Админпанель: редактирование товара";
@@ -7,46 +7,64 @@
 
 <div class="panel">
     <div class="panel-heading">
-        <h3>Редактирование товара "@Model.Name"</h3>
+        <h3>Редактирование товара "@Model.Product.Name"</h3>
     </div>
 
     @using (Html.BeginForm("Edit", "Admin",
     FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         <div class="panel-body">
-            @Html.HiddenFor(m => m.ProductId)
+            @Html.HiddenFor(m => m.Product.ProductId)
             @Html.ValidationSummary()
 
             <div class="col-md-6 col-xs-12">
                 <div class="form-group">
-                    @Html.LabelFor(modelItem => Model.Name)
-                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    @Html.LabelFor(modelItem => Model.Product.Name)
+                    @Html.TextBoxFor(m => m.Product.Name, new { @class = "form-control" })
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(modelItem => Model.Manufacturer)
-                    @Html.TextBoxFor(m => m.Manufacturer, new { @class = "form-control" })
+                    @Html.LabelFor(modelItem => Model.Product.Manufacturer)
+                    @Html.TextBoxFor(m => m.Product.Manufacturer, new { @class = "form-control" })
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(modelItem => Model.Description)
-                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control", rows = 5 })
-                    @*@Html.ValidationMessage(Model.Description)*@
+                    @Html.LabelFor(modelItem => Model.Product.Description)
+                    @Html.TextAreaFor(m => m.Product.Description, new { @class = "form-control", rows = 5 })
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(modelItem => Model.Category)
-                    @Html.TextBoxFor(m => m.Category, new { @class = "form-control" })
+                    <label>Категория: </label>
+                    @Html.DropDownListFor(m => m.Category.Name, new SelectList(Model.Categories, "CategoryId", "Name"))
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(modelItem => Model.Price)
-                    @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+                    @Html.LabelFor(modelItem => Model.Product.Price)
+                    @Html.TextBoxFor(m => m.Product.Price, new { @class = "form-control" })
                 </div>
 
                 @*//Блок отображения картинок*@
                 <div class="form-group">
                     <label>Картинки</label>
+                    
+                    @if (Model.Images != null)
+                    {
+                        <div style="display: inline-block">
+                            @foreach (var image in Model.Images)
+                            {
+                                <div  style="margin-right: 10px; float: left;">
+                                    <img style="max-width: 150px; max-height: 150px; display: block;" class="img-thumbnail"
+                                         src="@image.Path"/>
+                                    @Ajax.ActionLink("Удалить", "RemoveImage", "Admin", new { imageId = image.ID }, new AjaxOptions{ HttpMethod = "POST" })
+                                </div>
+                            }
+                        </div>
+                    }
+                    
+                    
+                    
+                    
+                    
 
                     @*@if (Model.Images == null || Model.Images.Count() == 0)
                     {
@@ -63,7 +81,7 @@
                             </div>
                         }
                     }*@
-                    <img class="img-thumbnail" width="120" height="120"
+                    @*<img class="img-thumbnail" width="120" height="120"
                          src="@Url.Action("GetImage", "Products",
                     new { Model.ProductId })" />
 
@@ -83,7 +101,7 @@
                             </div>
                         }
 
-                    }
+                    }*@
 
                     <div style="position:relative;">
                         <label>Добавить картинку</label>

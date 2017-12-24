@@ -1,8 +1,11 @@
-﻿using Domain.Abstract;
+﻿using System;
+using Domain.Abstract;
 using Domain.Entities;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using WebUI.Models;
 
 namespace WebUI.Controllers
 {
@@ -21,23 +24,37 @@ namespace WebUI.Controllers
             return View(repository.Products);
         }
 
-        public ViewResult Edit(int productId)
+        public ActionResult Edit(int productId)
         {
-            Product product = repository.Products.FirstOrDefault(b => b.ProductId == productId);
-            return View(product);
+            var product = repository.Products.FirstOrDefault(b => b.ProductId == productId);
+            if (product != null)
+            {
+                ProductEditViewModel model = new ProductEditViewModel
+                {
+                    Product = product,
+                    Images = repository.Images
+                        .Where(i => i.ProductID == productId).ToArray(),
+                    Category = repository.Categories
+                        .FirstOrDefault(c => c.CategoryId == product.Category),
+                    Categories = repository.Categories.ToList()
+                };
+                return View(model);
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Product not found");
         }
 
         [HttpPost]
-        public ActionResult Edit(Product product, HttpPostedFileBase image = null)
+        public ActionResult Edit(ProductEditViewModel product, HttpPostedFileBase image = null)
         {
             if (ModelState.IsValid)
             {
                 if (image != null)
                 {
-                    repository.AddImage(image, product.ProductId);
+                    repository.AddImage(image, product.Product.ProductId);
                 }
-                repository.SaveProduct(product);
-                TempData["message"] = string.Format("Изменение информации о товаре \"{0}\" сохранены", product.Name);
+                repository.SaveProduct(product.Product);
+                TempData["message"] = string.Format("Изменение информации о товаре \"{0}\" сохранены", product.Product.Name);
                 return RedirectToAction("Index");
             }
             else
@@ -48,7 +65,7 @@ namespace WebUI.Controllers
 
         public ViewResult Create()
         {
-            return View("Edit", new Product());
+            return View("Edit", new ProductEditViewModel());
         }
 
         [HttpPost]
@@ -61,6 +78,17 @@ namespace WebUI.Controllers
                     deletedProduct.Name);
             }
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult RemoveImage(int imageId)
+        {
+            if (repository.Images.FirstOrDefault(x => x.ID == imageId) != null)
+            {
+                repository.DeleteImage(imageId);
+                return new HttpStatusCodeResult(HttpStatusCode.OK);
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Image not found");
         }
     }
 }
