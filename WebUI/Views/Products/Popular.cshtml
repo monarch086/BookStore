@@ -1,5 +1,5 @@
-﻿@using Domain.Entities
-@model IEnumerable<Product>
+﻿@using WebUI.Models
+@model IEnumerable<ProductSmallViewModel>
 
 <div class="well" style="margin-right: 10px; padding-top: 0">
     <div class="row">
@@ -11,21 +11,24 @@
         @foreach (var product in Model)
         {
             <div class="col-xs-6">
-                <img class="img-thumbnail" width="50" height="50"
-                     src="@Url.Action("GetImage", "Products",
-                    new { product.ProductId })" />
+                @if (!string.IsNullOrEmpty(product.ImagePath))
+                {
+                    <img class="img-thumbnail" width="50" height="50"
+                         src="@product.ImagePath"/>
+                }
             </div>
+
             <div class="col-xs-6">
                 <h4>
                     <strong id="price" class="pull-right label label-primary">
-                        @product.Price.ToString("# грн")
+                        @product.Product.Price.ToString("# грн")
                     </strong>
                 </h4>
             </div>
 
             <div style="clear: both">
                 <h5>
-                    @product.Name
+                    @product.Product.Name
                 </h5>
             </div>
         }

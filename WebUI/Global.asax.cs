@@ -16,6 +16,7 @@ namespace WebUI
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
+            MappingConfigurations.Configure();
         }
     }
 }

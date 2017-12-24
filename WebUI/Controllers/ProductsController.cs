@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Mvc;
+using AutoMapper;
 using WebUI.Models;
 
 namespace WebUI.Controllers
@@ -22,20 +23,24 @@ namespace WebUI.Controllers
 
         public ViewResult List(int category = 0, int page = 1)
         {
-            ProductListViewModel model = new ProductListViewModel
-            {
-                Products = repository.Products
+            var products = repository.Products
                 .Where(b => category == 0 || b.Category == category)
                 .OrderBy(product => product.ProductId)
                 .Skip((page - 1) * pageSize)
-                .Take(pageSize),
+                .Take(pageSize).ToList();
+
+            var productsDTO = Mapper.Map<IEnumerable<Product>, List<ProductSmallViewModel>>(products);
+
+            ProductListViewModel model = new ProductListViewModel
+            {
+                Products = productsDTO,
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = page,
                     ItemsPerPage = pageSize,
                     TotalItems = category == 0 ?
                         repository.Products.Count() :
-                        repository.Products.Where(product => product.Category == category).Count()
+                        repository.Products.Count(product => product.Category == category)
                 },
                 CurrentCategory = category
             };
@@ -65,21 +70,12 @@ namespace WebUI.Controllers
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Product not found");
         }
 
-        public string GetImage(int productId)
-        {
-            Image image = repository.Images.FirstOrDefault(i => i.ProductID == productId);
-            if (image != null)
-            {
-                return image.Path;
-            }
-            return null;
-        }
-
         //Отображение наиболее покупаемых товаров
         public PartialViewResult Popular()
         {
-            IEnumerable<Product> products = repository.Products.Take(3);
-            return PartialView(products);
+            var products = repository.Products.Take(3);
+            var productsDTO = Mapper.Map<IEnumerable<Product>, List<ProductSmallViewModel>>(products);
+            return PartialView(productsDTO);
         }
     }
 }
