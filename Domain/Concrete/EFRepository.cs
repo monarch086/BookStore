@@ -2,9 +2,6 @@
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Hosting;
 
@@ -14,21 +11,9 @@ namespace Domain.Concrete
     {
         EFDbContext context = new EFDbContext();
 
-        public IEnumerable<Product> Products
-        {
-            get
-            {
-                return context.Products;
-            }
-        }
+        public IEnumerable<Product> Products => context.Products;
 
-        public IEnumerable<Category> Categories
-        {
-            get
-            {
-                return context.Categories;
-            }
-        }
+        public IEnumerable<Category> Categories => context.Categories;
 
         public void SaveProduct(Product product)
         {
@@ -62,13 +47,7 @@ namespace Domain.Concrete
             return dbEntry;
         }
 
-        public IEnumerable<Image> Images
-        {
-            get
-            {
-                return context.Images;
-            }
-        }
+        public IEnumerable<Image> Images => context.Images;
 
         public void AddImage(HttpPostedFileBase image, int productID)
         {

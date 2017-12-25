@@ -35,7 +35,7 @@
 
                 <div class="form-group">
                     <label>Категория: </label>
-                    @Html.DropDownListFor(m => m.Category.Name, new SelectList(Model.Categories, "CategoryId", "Name"))
+                    @Html.DropDownListFor(m => m.Category.CategoryId, new SelectList(Model.Categories, "CategoryId", "Name"))
                 </div>
 
                 <div class="form-group">
